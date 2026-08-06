@@ -67,9 +67,23 @@ Base URL: `http://localhost:8080`
 |---|---|---|--|---|
 | `POST` | `/board` | 게시글 생성 | `BoardDto` | `200 OK` |
 | `GET` | `/board` | 전체 조회 |  | `200 OK` · `BoardDto[]` |
-| `GET` | `/board/{id}` | 단건 조회 |  | `200 OK` · `BoardDto` |
-| `PATCH` | `/board` | 게시글 수정 | `BoardDto` (`id` 필수) | `200 OK` |
-| `DELETE` | `/board/{id}` | 게시글 삭제 |  | `200 OK` |
+| `GET` | `/board/{id}` | 단건 조회 |  | `200 OK` · `BoardDto` / `404` |
+| `PATCH` | `/board` | 게시글 수정 | `BoardDto` (`id` 필수) | `200 OK` / `404` |
+| `DELETE` | `/board/{id}` | 게시글 삭제 |  | `200 OK` / `404` |
+
+### 오류 응답
+
+존재하지 않는 게시글을 조회·수정·삭제하면 `404 Not Found` 를 반환합니다.
+예외 처리는 `@RestControllerAdvice` 에 모여 있어 컨트롤러는 정상 흐름만 다룹니다.
+
+```json
+{
+  "status": 404,
+  "error": "Not Found",
+  "message": "게시글을 찾을 수 없습니다. id=999",
+  "timestamp": "2026-08-06T14:01:50.289697"
+}
+```
 
 ---
 
