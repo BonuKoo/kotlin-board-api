@@ -29,7 +29,7 @@ Controller / Service / Repository 계층을 분리하고, 엔티티와 DTO를 �
 | 리포지토리 | 역할 | 기술 |
 |---|---|---|
 | **kotlin-board-api** (현재) | REST API 서버 | Kotlin, Spring Boot, JPA |
-| [compose-board-app](https://github.com/<your-github-id>/compose-board-app) | 안드로이드 클라이언트 | Kotlin, Jetpack Compose, Retrofit |
+| [compose-board-app](https://github.com/BonuKoo/compose-board-app) | 안드로이드 클라이언트 | Kotlin, Jetpack Compose, Retrofit |
 
 > 두 리포지토리는 별도로 관리되며 **HTTP/JSON 계약으로만 연결**됩니다.
 ---
