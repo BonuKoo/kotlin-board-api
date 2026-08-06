@@ -87,6 +87,27 @@ Base URL: `http://localhost:8080`
 
 ---
 
+## 테스트
+
+```bash
+./gradlew test
+```
+
+| 대상 | 개수 | 확인하는 것 |
+|---|---|---|
+| `BoardServiceTest` | 10 | 생성·조회·수정·삭제, 없는 게시글에 대한 예외, 수정 시 작성자 유지 |
+| `BoardApiTest` | 9 | 상태 코드와 JSON 필드, 404 응답, 한글 왕복 |
+| `BoardApplicationTests` | 1 | 애플리케이션 컨텍스트 로딩 |
+
+저장소를 흉내 내지 않고 실제 H2 로 검증합니다.
+`BoardServiceTest` 는 `@DataJpaTest` 로 JPA 계층만 올려 엔티티 매핑까지 함께 확인하고,
+`BoardApiTest` 는 `MockMvc` 로 실제 요청을 보내 HTTP 계약을 확인합니다.
+
+앱과는 HTTP 계약으로만 연결되므로, 상태 코드나 JSON 필드 이름이 바뀌면
+앱이 조용히 깨집니다. `BoardApiTest` 가 그 경계를 지킵니다.
+
+---
+
 ### 개발용 도구
 
 | 도구 | 주소 |
