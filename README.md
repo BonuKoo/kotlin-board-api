@@ -54,13 +54,6 @@ Controller / Service / Repository 계층을 분리하고, 엔티티와 DTO를 �
 | 빌드 | Gradle 9.5.1, **war 패키징** |
 | 테스트 | JUnit 5, AssertJ, MockMvc |
 
-### 왜 war 패키징인가
-
-JSP는 실행 가능한 jar 안에서 동작하지 않습니다.
-Jasper가 `.jsp`를 서블릿으로 컴파일하려면 서블릿 컨테이너의 문서 루트가 필요하므로
-`war` 플러그인을 적용하고 뷰를 `src/main/webapp` 아래에 둡니다.
-실행은 내장 Tomcat이 그대로 맡으므로 `bootRun` / `java -jar` 방식은 달라지지 않습니다.
-
 ---
 
 ## 구조
@@ -74,25 +67,6 @@ Jasper가 `.jsp`를 서블릿으로 컴파일하려면 서블릿 컨테이너의
 | `BoardRepository` | 영속성 접근 (`JpaRepository` 상속) |
 | `BoardEntity` | 도메인 모델, 상태 변경 메서드 |
 | `BoardDto` | 계층 간·클라이언트 간 데이터 전달 |
-
-```
-src/main/java/com/board/
-├── controller/   BoardViewController · BoardApiController · HomeController
-├── service/      BoardService
-├── repository/   BoardRepository
-├── entity/       BoardEntity · dto/BoardDto
-└── exception/    BoardNotFoundException · ErrorResponse
-                  ApiExceptionHandler(JSON) · ViewExceptionHandler(HTML)
-
-src/main/webapp/
-├── WEB-INF/views/
-│   ├── board/    list.jsp · detail.jsp · form.jsp
-│   ├── common/   header.jspf · footer.jspf
-│   └── error/    notFound.jsp
-└── css/          style.css
-```
-
-뷰를 `WEB-INF` 아래에 두면 URL로 직접 접근할 수 없어 반드시 컨트롤러를 거치게 됩니다.
 
 ---
 
@@ -153,30 +127,7 @@ API는 JSON을, 브라우저는 사람이 읽는 HTML 화면을 받아야 하기
   "timestamp": "2026-08-07T09:05:34.476745"
 }
 ```
-
 ---
-
-## 실행
-
-```bash
-./gradlew bootRun
-```
-
-war로 빌드해 실행할 수도 있습니다.
-
-```bash
-./gradlew build
-```
-
-빌드 결과는 `build/libs/java-jsp-board-0.0.1-SNAPSHOT.war` 입니다.
-
----
-
-## 테스트
-
-```bash
-./gradlew test
-```
 
 | 대상 | 개수 | 확인하는 것 |
 |---|---|---|
@@ -206,12 +157,6 @@ war로 빌드해 실행할 수도 있습니다.
 | Swagger UI | http://localhost:8080/swagger-ui.html |
 | OpenAPI 스펙 | http://localhost:8080/v3/api-docs |
 | H2 Console | http://localhost:8080/h2-console |
-
-
-> **안드로이드 앱에서 연결할 때**
-> 에뮬레이터·실기기는 `localhost`를 인식하지 못합니다.
-> 서버가 실행 중인 PC의 **LAN IP**(예: `http://???.???.?.?:8080`)를 사용하고,
-> 방화벽에서 8080 포트 인바운드를 허용해야 합니다.
 
 
 ---
