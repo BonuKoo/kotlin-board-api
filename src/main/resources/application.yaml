@@ -1,6 +1,15 @@
 spring:
   application:
     name: board
+
+  # JSP 뷰 설정
+  # 컨트롤러가 반환한 "board/list" 를 /WEB-INF/views/board/list.jsp 로 바꿔 찾는다.
+  # WEB-INF 아래 두면 URL 로 직접 접근할 수 없어 컨트롤러를 거치게 강제된다.
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
   # H2 Database 설정
   datasource:
     driver-class-name: org.h2.Driver

@@ -1,0 +1,28 @@
+<%--
+  모든 화면이 공유하는 머리말. 정적 include 로 각 JSP 앞에 붙는다.
+
+  정적 include 되는 조각도 인코딩은 스스로 밝혀야 한다.
+  안 밝히면 Jasper 가 ISO-8859-1 로 읽어 이 파일의 한글만 깨진다.
+  contentType 은 포함하는 쪽 JSP 에만 둔다(값이 다르면 변환 오류).
+--%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><c:out value="${pageTitle}" default="게시판" /></title>
+    <link rel="stylesheet" href="${ctx}/css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="${ctx}/boards">게시판</a>
+    <nav>
+        <a href="${ctx}/boards">목록</a>
+        <a href="${ctx}/swagger-ui.html">API 문서</a>
+        <a href="${ctx}/h2-console">H2 콘솔</a>
+    </nav>
+</header>
+<main class="container">
